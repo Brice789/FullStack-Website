@@ -10,7 +10,6 @@ const port = 3000
 const mongoose = require('mongoose');
 //mongoose.connect('mongodb://127.0.0.1:27017/test');
 
-
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://firstdb:<password>@cluster0.yvivmp3.mongodb.net/?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
@@ -20,21 +19,17 @@ client.connect(err => {
   client.close();
 });
 
-
 const {schema} = mongoose
 
 // const product = mongoose.model(product, product_shema)
-// console.log("product:", product )
-
-
+// console.log("product:", product)
 //mongoose.connect(uri);
 
 //MIDDLE WARE
 app.use(cors());  
 app.use(bodyParser.json());
 
-//Routes
-
+//Routes 3 endpoints
 
 app.post('/api/products', (req, res) => {
   //console.log("please")
@@ -45,11 +40,15 @@ app.post('/api/products', (req, res) => {
   res.send({product : product1})
 })
 
-app.get('/', (req, res) => {
+// ok en vue de la réponse
+app.get('/api/products', (req, res) => {
   console.log(req.params);
   res.send('Hello World!')
 })
 
+//1/ uniquement id
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
+console.log(`Example app listening on port ${port}`)
 })
+
+//3eme insertion des infos à la base de données
